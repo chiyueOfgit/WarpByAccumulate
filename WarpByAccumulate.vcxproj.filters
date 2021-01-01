@@ -84,6 +84,10 @@
     <None Include="warp_on_gpu_by_accumulate.comp" />
     <None Include="get_warp_region_coefficient(texSize=1).comp" />
     <None Include="get_warp_region_coefficient(texSize=4).comp" />
+    <None Include="get_coefficient_mipmap_2x2.comp" />
+    <None Include="get_coefficient_mipmap_4x4.comp" />
+    <None Include="get_coefficient_mipmap_8x8.comp" />
+    <None Include="get_coefficient_mipmap_16x16.comp" />
   </ItemGroup>
   <ItemGroup>
     <Image Include="tex.jpg">
