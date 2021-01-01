@@ -31,8 +31,6 @@ protected:
 		m_pQuadProgram = ShaderProgram::create("quad_tex2d_array.vert", "quad_tex2d_array.frag");
 		m_pInitWarpingProgram = ShaderProgram::create("init_warping_point.comp");
 		m_pGetWarpingRegionProgram= ShaderProgram::create("get_warp_region_coefficient.comp");
-		//m_pGetWarpingRegionOfSize_1_Program = ShaderProgram::create("get_warp_region_coefficient(texSize=1).comp");
-		//m_pGetWarpingRegionOfSize_4_Program = ShaderProgram::create("get_warp_region_coefficient(texSize=4).comp");
 		m_pGetWarpingRegionOfSize_2x2_Program = ShaderProgram::create("get_coefficient_mipmap_2x2.comp");
 		m_pGetWarpingRegionOfSize_4x4_Program = ShaderProgram::create("get_coefficient_mipmap_4x4.comp");
 		m_pGetWarpingRegionOfSize_8x8_Program = ShaderProgram::create("get_coefficient_mipmap_8x8.comp");
@@ -50,7 +48,6 @@ protected:
 		m_pUniformSampleBuffer = createUniformSampleBuffer(m_NumSample, 0);
 		m_pWarpingSampleBuffer = ShaderStorageBuffer::create(sizeof(float) * m_NumSample * m_NumProbe * 2, nullptr, 1);
 		m_pWarpingRegionBuffer = ShaderStorageBuffer::create(sizeof(float) * 340 * m_NumProbe * 8, nullptr, 2);
-		//m_pCopyWarpingRegionBuffer = ShaderStorageBuffer::create(sizeof(float) * m_NumSample * m_NumProbe * 8, nullptr, 3);
 		m_pImage2D = Image2D::createEmpty(256, 256, GL_R32F, GL_RED, 0);
 	}
 
@@ -75,7 +72,6 @@ protected:
 		m_pInitWarpingProgram->use();
 		glDispatchCompute(256,1,1);
 
-		//m_pGetWarpingRegionProgram->use();
 		auto TotalLayer = std::log2(m_pTexArray->width()) + 1;
 		for (size_t i = 0; i < TotalLayer-1; i++)
 		{
@@ -113,7 +109,6 @@ protected:
 		}
 
 		m_pWarpingProgram->use();
-		//glDispatchCompute(m_NumProbe, 1, 1);
 		glDispatchCompute(m_NumProbe,1, 1);
 		m_pVisualizeWarpingProgram->use();
 		glDispatchCompute(16,16,1);

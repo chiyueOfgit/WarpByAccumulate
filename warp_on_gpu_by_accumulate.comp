@@ -53,7 +53,7 @@ uint findLocationOfNextMipmap(in vec2 vPoint,in uint vRegionBegin,in uint vRegio
 
 void main(void)
 {
-////////256*256个线程，每个线程最多循环4+4+4+4次
+//256*256个线程，每个线程最多循环4+4+4+4次
     uint pointIdx = gl_WorkGroupID.x*256+gl_LocalInvocationID.x;
     vec2 WarpingPoint = WarpingPoints[pointIdx];
 	uint RegionOffest=0;
